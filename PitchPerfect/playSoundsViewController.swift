@@ -20,6 +20,7 @@ class PlaySoundsViewController: UIViewController {
     @IBOutlet weak var reverbButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
     
+    
     //MARK: AVAudioPlayDelegate object declarations
     var recordedAudioURL: URL!
     var audioFile:AVAudioFile!
@@ -65,5 +66,4 @@ class PlaySoundsViewController: UIViewController {
         super.viewWillAppear(animated)
         configureUI(.notPlaying)
     }
-
 }
