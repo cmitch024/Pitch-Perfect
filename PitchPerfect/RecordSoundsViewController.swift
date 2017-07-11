@@ -77,6 +77,9 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         stopRecordingButton.isEnabled = recording
         recordButton.isEnabled = !recording
         recordingLabel.text = recording ? "Recording in Progress" : "Tap to Record"
+        
+        recordButton.imageView?.contentMode = .scaleAspectFit
+        stopRecordingButton.imageView?.contentMode = .scaleAspectFit
     }
 }
 
