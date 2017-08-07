@@ -11,6 +11,8 @@ import AVFoundation
 
 class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
+    //MARK: Properties
+    
     var audioRecorder: AVAudioRecorder!
     
     //MARK: IBOutlets
@@ -47,15 +49,21 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         try! audioSession.setActive(false)
     }
     
-    //MARK: functions
+    //MARK: Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        recordButton.imageView?.contentMode = .scaleAspectFit
+        stopRecordingButton.imageView?.contentMode = .scaleAspectFit
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureUI(recording: false)
     }
+    
+    //MARK: Functions
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if flag {
@@ -65,6 +73,14 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         }
     }
     
+    func configureUI(recording: Bool) {
+        stopRecordingButton.isEnabled = recording
+        recordButton.isEnabled = !recording
+        recordingLabel.text = recording ? "Recording in Progress" : "Tap to Record"
+    }
+    
+    //MARK: Segue
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "stopRecording" {
             let playSoundsVC = segue.destination as! PlaySoundsViewController
@@ -73,13 +89,5 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         }
     }
     
-    func configureUI(recording: Bool) {
-        stopRecordingButton.isEnabled = recording
-        recordButton.isEnabled = !recording
-        recordingLabel.text = recording ? "Recording in Progress" : "Tap to Record"
-        
-        recordButton.imageView?.contentMode = .scaleAspectFit
-        stopRecordingButton.imageView?.contentMode = .scaleAspectFit
-    }
-}
+} // end RecordSoundsVC
 
